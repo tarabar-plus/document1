@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TarabarPlus - راهنمای کامل سیستم</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Vazir Font Import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @media print {
+        .no-print {
+          display: none !important;
+        }
+        body {
+          margin: 0;
+          font-family: "Vazirmatn", "vazir", sans-serif;
+          padding: 20px;
+        }
+        .step-card {
+          break-inside: avoid;
+          page-break-inside: avoid;
+        }
+        .page-break {
+          page-break-before: always;
+        }
+      }
+
+      /* Apply Vazir font to entire page */
+      * {
+        font-family: "Vazirmatn", "vazir", sans-serif !important;
+      }
+
+      body {
+        font-family: "Vazirmatn", "vazir", sans-serif !important;
+      }
+
+      .step-card {
+        transition: all 0.3s ease;
+        transform: scale(1);
+        margin-bottom: 2rem;
+        break-inside: avoid;
+      }
+      .step-card:hover {
+        transform: scale(1.01);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+      }
+      .step-active {
+        border-color: #3b82f6;
+        background-color: #eff6ff;
+      }
+      .fade-in {
+        animation: fadeIn 0.5s ease-in;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .image-container {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+      .image-container:hover {
+        transform: scale(1.02);
+      }
+      .mobile-image {
+        max-height: 200px;
+        width: auto;
+        object-fit: contain;
+      }
+      .web-image {
+        max-height: 180px;
+        width: auto;
+        object-fit: contain;
+      }
+      .step-image-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 0.75rem;
+        margin-top: 1rem;
+      }
+      .main-image {
+        max-height: 250px;
+        width: auto;
+        object-fit: contain;
+      }
+      .zoom-controls {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        border-radius: 50px;
+        padding: 10px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+      }
+      .zoom-btn {
+        width: 40px;
+        height: 40px;
+        border: none;
+        border-radius: 50%;
+        background: #3b82f6;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+        margin: 0 5px;
+        transition: all 0.3s ease;
+      }
+      .zoom-btn:hover {
+        background: #2563eb;
+        transform: scale(1.1);
+      }
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        backdrop-filter: blur(5px);
+      }
+      .modal-content {
+        margin: auto;
+        display: block;
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+        border-radius: 8px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      }
+      .close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 2001;
+      }
+      .close:hover {
+        color: #bbb;
+      }
+      .modal-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: none;
+        padding: 15px 20px;
+        cursor: pointer;
+        border-radius: 50%;
+        font-size: 24px;
+        transition: all 0.3s ease;
+        z-index: 2001;
+      }
+      .modal-nav:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-50%) scale(1.1);
+      }
+      .modal-prev {
+        left: 20px;
+      }
+      .modal-next {
+        right: 20px;
+      }
+      .modal-info {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-size: 14px;
+        z-index: 2001;
+      }
+      .image-counter {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-size: 14px;
+        z-index: 2001;
+      }
+      .pdf-header {
+        text-align: center;
+        margin-bottom: 2rem;
+        padding: 2rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-bottom-left-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+      }
+      .pdf-header h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        font-family: "Vazirmatn", "vazir", sans-serif !important;
+      }
+      .pdf-header p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        font-family: "Vazirmatn", "vazir", sans-serif !important;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-gradient-to-br from-blue-50 to-indigo-100 font-sans rtl min-h-screen"
+  >
+    <!-- PDF Header -->
+    <div class="pdf-header">
+      <h1>راهنمای کامل فرآیند ثبت حواله در سیستم ترابر پلاس</h1>
+      <!-- <p>راهنمای جامع استفاده از سیستم مدیریت حواله</p> -->
+    </div>
+
+    <!-- Main Content - Single Page Layout -->
+    <main class="container mx-auto px-6 pb-8">
+      <!-- Step 1: Landing Page -->
+      <div
+        class="step-card bg-white rounded-xl shadow-lg p-6 border-2 border-blue-200"
+      >
+        <div class="flex items-start space-x-6 space-x-reverse">
+          <div class="flex-1">
+            <div class="flex items-center space-x-3 space-x-reverse mb-4">
+              <span
+                class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-bold"
+                >مرحله ۱</span
+              >
+              <h2 class="text-2xl font-bold text-gray-800">صفحه اصلی سیستم</h2>
+            </div>
+            <p class="text-gray-600 mb-4 leading-relaxed">
+              صفحه اصلی ترابر پلاس اولین نقطه تماس باربری ها با سامانه است. این
+              صفحه شامل اطلاعات کلی، آمار سامانه و دسترسی سریع به بخش‌های مختلف
+              می‌باشد. باربری ها می‌توانند از این صفحه به تمام بخش‌های سامانه
+              دسترسی داشته باشند.
+            </p>
+          </div>
+          <div class="flex-shrink-0">
+            <img
+              src="extracted_images/step-1.png"
+              alt="صفحه اصلی سامانه"
+              class="image-container main-image"
+              loading="lazy"
+              onclick="openStepModal(1, 0)"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Login Form -->
+      <div
+        class="step-card bg-white rounded-xl shadow-lg p-6 border-2 border-gray-200"
+      >
+        <div class="flex items-start space-x-6 space-x-reverse">
+          <div class="flex-1">
+            <div class="flex items-center space-x-3 space-x-reverse mb-4">
+              <span
+                class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold"
+                >مرحله ۲</span
+              >
+              <h2 class="text-2xl font-bold text-gray-800">
+                فرم ورود به سامانه
+              </h2>
+            </div>
+            <p class="text-gray-600 mb-4 leading-relaxed">
+              سامانه احراز هویت ترابر پلاس با استفاده از تکنولوژی‌های مدرن
+              امنیتی طراحی شده است. باربری ها می‌توانند با نام کاربری و رمز عبور
+              وارد سامانه شوند. این سامانه شامل محافظت‌های امنیتی پیشرفته و لاگ
+              کامل فعالیت‌ها می‌باشد.
+            </p>
+          </div>
+          <div class="flex-shrink-0">
+            <img
+              src="extracted_images/step-2.png"
+              alt="فرم ورود به سامانه"
+              class="image-container main-image"
+              loading="lazy"
+              onclick="openStepModal(2, 0)"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Cargo Registration -->
+      <div
+        class="step-card bg-white rounded-xl shadow-lg p-6 border-2 border-gray-200"
+      >
+        <div class="mb-4">
+          <div class="flex items-center space-x-3 space-x-reverse mb-4">
+            <span
+              class="bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-bold"
+              >مرحله ۳</span
+            >
+            <h2 class="text-2xl font-bold text-gray-800">ثبت بار</h2>
+          </div>
+          <p class="text-gray-600 leading-relaxed">
+            پس از ورود موفقیت آمیز کاربر (باربری) وارد قسمت ثبت بار شده و مشخصات
+            بار را وارد می کند .پس از ثبت وارد قسمت تاریخچه بارها می‌شود و
+            فعالسازی بار را وارد می‌کند (توجه: پس از فعالسازی است که راننده ها
+            می‌توانند در پنل مربوطه در اپلیکیشن بار را مشاهده کنند.)
+          </p>
+        </div>
+
+        <!-- Cargo Registration Images Grid -->
+        <div class="step-image-grid">
+          <img
+            src="extracted_images/step-3.png"
+            alt="فرم ثبت بار قسمت اول"
+            class="image-container web-image"
+            loading="lazy"
+            onclick="openStepModal(3, 0)"
+          />
+          <img
+            src="extracted_images/step-4.png"
+            alt="فرم ثبت بار قسمت دوم"
+            class="image-container web-image"
+            loading="lazy"
+            onclick="openStepModal(3, 1)"
+          />
+          <img
+            src="extracted_images/step-5.png"
+            alt="تاریخچه بارها"
+            class="image-container web-image"
+            loading="lazy"
+            onclick="openStepModal(3, 2)"
+          />
+          <img
+            src="extracted_images/step-6.png"
+            alt="نحوه فعالسازی بار"
+            class="image-container web-image"
+            loading="lazy"
+            onclick="openStepModal(3, 3)"
+          />
+        </div>
+      </div>
+
+      <!-- Step 4: Cargo History -->
+      <div
+        class="step-card bg-white rounded-xl shadow-lg p-6 border-2 border-gray-200"
+      >
+        <div class="flex items-start space-x-6 space-x-reverse">
+          <div class="flex-1">
+            <div class="flex items-center space-x-3 space-x-reverse mb-4">
+              <span
+                class="bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-bold"
+                >مرحله ۴</span
+              >
+              <h2 class="text-2xl font-bold text-gray-800">
+                پنل موبایل راننده
+              </h2>
+            </div>
+            <p class="text-gray-600 mb-4 leading-relaxed">
+              پس از اعلام بار توسط باربری راننده وارد اپلکیشن ترابر پلاس می‌شود
+              . و با انتخاب قسمت علام بار به سمت بارهای اعلامی هدایت می‌شود.
+            </p>
+          </div>
+          <div class="flex-shrink-0">
+            <img
+              src="extracted_images/step-7.jpeg"
+              alt="پنل موبایل راننده"
+              class="image-container main-image"
+              loading="lazy"
+              onclick="openStepModal(4, 0)"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 5: Mobile Dashboard -->
+      <div
+        class="step-card bg-white rounded-xl shadow-lg p-6 border-2 border-gray-200"
+      >
+        <div class="mb-4">
+          <div class="flex items-center space-x-3 space-x-reverse mb-4">
+            <span
+              class="bg-teal-500 text-white px-3 py-1 rounded-full text-sm font-bold"
+              >مرحله ۵</span
+            >
+            <h2 class="text-2xl font-bold text-gray-800">صفحه اعلام بارها</h2>
+          </div>
+          <p class="text-gray-600 leading-relaxed">
+            در این بخش راننده با توجه به موقعیت چعرافیایی خود (این موقعیت توسط
+            باربری تنظیم می‌شود ) بارهای اعلامی را مشاهده می‌کند. سپس انتخاب
+            کرده و پس از آن با توجه به فاصله مبدا تا مقصد و همچنین افزودن زمان
+            اضافه به راننده نشان داده می‌شود که تا مثلا ساعت ۱۰:۲۵ فردا شما
+            نمی‌توانید بار رزرو کنید. پس از آن طی یک پیامک به راننده اعلام
+            می‌شود که نوبت شما با موفقیت ثبت شد .در نهایت راننده می‌تواند بار
+            رزرو شده را در تب سابقه بار ها ببیند.
+          </p>
+        </div>
+
+        <!-- Mobile App Images Grid -->
+        <div class="step-image-grid">
+          <img
+            src="extracted_images/step-8.jpeg"
+            alt="داشبورد موبایل"
+            class="image-container mobile-image"
+            loading="lazy"
+            onclick="openStepModal(5, 0)"
+          />
+          <img
+            src="extracted_images/step-9.jpeg"
+            alt="تنظیمات موبایل"
+            class="image-container mobile-image"
+            loading="lazy"
+            onclick="openStepModal(5, 1)"
+          />
+          <img
+            src="extracted_images/step-10.jpeg"
+            alt="پروفایل موبایل"
+            class="image-container mobile-image"
+            loading="lazy"
+            onclick="openStepModal(5, 2)"
+          />
+          <img
+            src="extracted_images/step-11.jpeg"
+            alt="اعلان‌های موبایل"
+            class="image-container mobile-image"
+            loading="lazy"
+            onclick="openStepModal(5, 3)"
+          />
+        </div>
+      </div>
+
+      <!-- Step 6: Mobile Cargo Details -->
+      <div
+        class="step-card bg-white rounded-xl shadow-lg p-6 border-2 border-gray-200"
+      >
+        <div class="flex items-start space-x-6 space-x-reverse">
+          <div class="flex-1">
+            <div class="flex items-center space-x-3 space-x-reverse mb-4">
+              <span
+                class="bg-pink-500 text-white px-3 py-1 rounded-full text-sm font-bold"
+                >مرحله ۶</span
+              >
+              <h2 class="text-2xl font-bold text-gray-800">
+                مشاهده راننده های ثبت‌نامی
+              </h2>
+            </div>
+            <p class="text-gray-600 mb-4 leading-relaxed">
+              پس از ثبت نوبت و رزرو بار توسط راننده ,باربری می‌تواند لیست راننده
+              های ثبت‌نامی را دیده و آنهایی که رسیده‌اند را تایید کند و برای
+              حواله چاپ کند .
+            </p>
+          </div>
+          <div class="flex-shrink-0">
+            <img
+              src="extracted_images/step-12.png"
+              alt="جزئیات بار و اعلان‌ها"
+              class="image-container main-image"
+              loading="lazy"
+              onclick="openStepModal(6, 0)"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 7: Additional Mobile Features -->
+      <div
+        class="step-card bg-white rounded-xl shadow-lg p-6 border-2 border-gray-200"
+      >
+        <div class="flex items-start space-x-6 space-x-reverse">
+          <div class="flex-1">
+            <div class="flex items-center space-x-3 space-x-reverse mb-4">
+              <span
+                class="bg-indigo-500 text-white px-3 py-1 rounded-full text-sm font-bold"
+                >مرحله ۷</span
+              >
+              <h2 class="text-2xl font-bold text-gray-800">چاپ حواله بار</h2>
+            </div>
+            <p class="text-gray-600 mb-4 leading-relaxed">
+              در نهایت پس از رسیدن راننده ,اپراتور باربری او را تایید کرده و
+              برای او حواله را چاپ می کند
+            </p>
+          </div>
+          <div class="flex-shrink-0">
+            <img
+              src="extracted_images/step-13.png"
+              alt=" چاپ حواله"
+              class="image-container main-image"
+              loading="lazy"
+              onclick="openStepModal(7, 0)"
+            />
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Zoom Controls -->
+    <div class="zoom-controls no-print">
+      <button class="zoom-btn" onclick="zoomIn()" title="Zoom In">+</button>
+      <button class="zoom-btn" onclick="zoomOut()" title="Zoom Out">−</button>
+      <button class="zoom-btn" onclick="resetZoom()" title="Reset Zoom">
+        ↺
+      </button>
+    </div>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+      <span class="close">&times;</span>
+      <div class="image-counter" id="imageCounter"></div>
+      <div class="modal-info" id="modalInfo"></div>
+      <button
+        class="modal-nav modal-prev"
+        onclick="previousImage()"
+        id="prevBtn"
+      >
+        ‹
+      </button>
+      <button class="modal-nav modal-next" onclick="nextImage()" id="nextBtn">
+        ›
+      </button>
+      <img class="modal-content" id="modalImage" />
+    </div>
+
+    <script>
+      let currentZoom = 1;
+      const zoomStep = 0.2;
+      const maxZoom = 3;
+      const minZoom = 0.5;
+
+      let currentStep = 1;
+      let currentImageIndex = 0;
+      let stepImages = {};
+
+      // Define images for each step
+      function initializeStepImages() {
+        stepImages = {
+          1: [{ src: "extracted_images/step-1.png", alt: "صفحه اصلی سیستم" }],
+          2: [{ src: "extracted_images/step-2.png", alt: "فرم ورود به سیستم" }],
+          3: [
+            { src: "extracted_images/step-3.png", alt: "فرم ثبت بار قسمت اول" },
+            { src: "extracted_images/step-4.png", alt: "فرم ثبت بار قسمت دوم" },
+            { src: "extracted_images/step-5.png", alt: "تاریخچه بارها" },
+            { src: "extracted_images/step-6.png", alt: "نحوه فعالسازی بار" }
+          ],
+          4: [
+            { src: "extracted_images/step-7.jpeg", alt: "پنل موبایل راننده" }
+          ],
+          5: [
+            { src: "extracted_images/step-8.jpeg", alt: "صفحه اعلام بارها" },
+            {
+              src: "extracted_images/step-9.jpeg",
+              alt: "نتیجه ثبت بار درون صفحه اعلام‌بارها"
+            },
+            {
+              src: "extracted_images/step-10.jpeg",
+              alt: "دریافت پیامک موفقیت آمیز"
+            },
+            {
+              src: "extracted_images/step-11.jpeg",
+              alt: "مشاهده بار در تب سابقه بارها "
+            }
+          ],
+          6: [
+            {
+              src: "extracted_images/step-12.png",
+              alt: "لیست راننده ها و انجام عملگر مناسب"
+            }
+          ],
+          7: [{ src: "extracted_images/step-13.png", alt: "چاپ حواله  " }]
+        };
+      }
+
+      // Open step modal with step-by-step navigation
+      function openStepModal(stepNumber, imageIndex) {
+        currentStep = stepNumber;
+        currentImageIndex = imageIndex;
+
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("modalImage");
+        const counter = document.getElementById("imageCounter");
+        const info = document.getElementById("modalInfo");
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+
+        const images = stepImages[stepNumber];
+        const currentImage = images[imageIndex];
+
+        modalImg.src = currentImage.src;
+        modalImg.alt = currentImage.alt;
+
+        // Update counter
+        counter.textContent = `${imageIndex + 1} از ${images.length}`;
+
+        // Update info
+        info.textContent = currentImage.alt;
+
+        // Show/hide navigation buttons
+        prevBtn.style.display = imageIndex > 0 ? "block" : "none";
+        nextBtn.style.display =
+          imageIndex < images.length - 1 ? "block" : "none";
+
+        modal.style.display = "block";
+      }
+
+      // Navigate to previous image
+      function previousImage() {
+        if (currentImageIndex > 0) {
+          currentImageIndex--;
+          openStepModal(currentStep, currentImageIndex);
+        }
+      }
+
+      // Navigate to next image
+      function nextImage() {
+        const images = stepImages[currentStep];
+        if (currentImageIndex < images.length - 1) {
+          currentImageIndex++;
+          openStepModal(currentStep, currentImageIndex);
+        }
+      }
+
+      // Zoom functions
+      function zoomIn() {
+        if (currentZoom < maxZoom) {
+          currentZoom += zoomStep;
+          applyZoom();
+        }
+      }
+
+      function zoomOut() {
+        if (currentZoom > minZoom) {
+          currentZoom -= zoomStep;
+          applyZoom();
+        }
+      }
+
+      function resetZoom() {
+        currentZoom = 1;
+        applyZoom();
+      }
+
+      function applyZoom() {
+        document.body.style.transform = `scale(${currentZoom})`;
+        document.body.style.transformOrigin = "top center";
+      }
+
+      // Modal functions
+      function closeModal() {
+        document.getElementById("imageModal").style.display = "none";
+      }
+
+      // Initialize
+      document.addEventListener("DOMContentLoaded", function () {
+        initializeStepImages();
+      });
+
+      // Add keyboard navigation
+      document.addEventListener("keydown", function (e) {
+        // Zoom with keyboard
+        if (e.ctrlKey || e.metaKey) {
+          if (e.key === "=" || e.key === "+") {
+            e.preventDefault();
+            zoomIn();
+          } else if (e.key === "-") {
+            e.preventDefault();
+            zoomOut();
+          } else if (e.key === "0") {
+            e.preventDefault();
+            resetZoom();
+          }
+        }
+
+        // Modal navigation with arrow keys
+        if (document.getElementById("imageModal").style.display === "block") {
+          if (e.key === "ArrowLeft") {
+            e.preventDefault();
+            previousImage();
+          } else if (e.key === "ArrowRight") {
+            e.preventDefault();
+            nextImage();
+          }
+        }
+      });
+
+      // Close modal with Escape key
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          closeModal();
+        }
+      });
+    </script>
+  </body>
+</html>
