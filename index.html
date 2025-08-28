@@ -2,7 +2,10 @@
 <html lang="fa" dir="rtl">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"
+    />
     <title>TarabarPlus - راهنمای کامل سیستم</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Vazir Font Import -->
@@ -70,7 +73,7 @@
           transform: translateY(0);
         }
       }
-      
+
       /* Enhanced Mobile-First Image Styling */
       .image-container {
         max-width: 100%;
@@ -86,7 +89,7 @@
         transform: scale(1.02);
         border-color: #3b82f6;
       }
-      
+
       /* Mobile-optimized image sizes */
       .mobile-image {
         max-height: 180px;
@@ -106,7 +109,7 @@
         object-fit: cover;
         border-radius: 12px;
       }
-      
+
       /* Responsive image grid */
       .step-image-grid {
         display: grid;
@@ -114,7 +117,7 @@
         gap: 0.75rem;
         margin-top: 1rem;
       }
-      
+
       /* Mobile-specific zoom controls */
       .zoom-controls {
         position: fixed;
@@ -148,92 +151,143 @@
         touch-action: manipulation;
         -webkit-tap-highlight-color: transparent;
       }
-      .zoom-btn:hover, .zoom-btn:active {
+      .zoom-btn:hover,
+      .zoom-btn:active {
         background: #3b82f6;
         color: #ffffff;
         transform: scale(1.1);
       }
-      
-      /* Enhanced modal for mobile */
+
+      /* Enhanced modal for mobile - Complete rewrite */
       .modal {
         display: none;
         position: fixed;
-        z-index: 2000;
+        z-index: 9999;
         left: 0;
         top: 0;
         width: 100%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.95);
-        backdrop-filter: blur(5px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 1rem;
-        touch-action: manipulation;
+        backdrop-filter: blur(10px);
+        overflow: hidden;
       }
-      .modal-content {
-        margin: auto;
-        display: block;
-        max-width: 95%;
+
+      .modal-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+      }
+
+      .modal-image {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 90%;
         max-height: 90%;
         object-fit: contain;
         border-radius: 12px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        border: 4px solid #3b82f6;
-        animation: fadeIn 0.5s ease-in-out;
-        touch-action: manipulation;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        border: 3px solid #3b82f6;
+        animation: modalFadeIn 0.3s ease-out;
+        z-index: 10001;
       }
-      @keyframes fadeIn {
+
+      @keyframes modalFadeIn {
         from {
           opacity: 0;
-          transform: scale(0.9);
+          transform: translate(-50%, -50%) scale(0.8);
         }
         to {
           opacity: 1;
-          transform: scale(1);
+          transform: translate(-50%, -50%) scale(1);
         }
       }
-      .close {
+
+      /* Close Button - Fixed positioning and styling */
+      .modal-close {
         position: absolute;
-        top: 15px;
-        right: 35px;
-        color: #f1f1f1;
-        font-size: 40px;
-        font-weight: bold;
+        top: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        background: rgba(0, 0, 0, 0.7);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        color: white;
         cursor: pointer;
-        z-index: 2001;
-        touch-action: manipulation;
+        z-index: 10002;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
         -webkit-tap-highlight-color: transparent;
       }
-      .close:hover {
-        color: #bbb;
+
+      .modal-close:hover,
+      .modal-close:active {
+        background: rgba(255, 0, 0, 0.8);
+        border-color: rgba(255, 255, 255, 0.8);
+        transform: scale(1.1);
       }
+
+      /* Navigation Buttons - Fixed positioning and directions */
       .modal-nav {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        background: rgba(255, 255, 255, 0.2);
-        color: white;
-        border: none;
-        padding: 15px 20px;
-        cursor: pointer;
+        width: 60px;
+        height: 60px;
+        background: rgba(0, 0, 0, 0.6);
+        border: 2px solid rgba(255, 255, 255, 0.3);
         border-radius: 50%;
-        font-size: 24px;
+        color: white;
+        cursor: pointer;
+        z-index: 10002;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         transition: all 0.3s ease;
-        z-index: 2001;
-        touch-action: manipulation;
+        backdrop-filter: blur(10px);
         -webkit-tap-highlight-color: transparent;
       }
-      .modal-nav:hover {
-        background: rgba(255, 255, 255, 0.3);
+
+      .modal-nav:hover,
+      .modal-nav:active {
+        background: rgba(59, 130, 246, 0.8);
+        border-color: rgba(255, 255, 255, 0.8);
         transform: translateY(-50%) scale(1.1);
       }
+
       .modal-prev {
         left: 20px;
       }
+
       .modal-next {
         right: 20px;
       }
+
+      /* Image Counter */
+      .modal-counter {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 12px 20px;
+        border-radius: 25px;
+        font-size: 14px;
+        font-weight: bold;
+        z-index: 10002;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      /* Image Info */
       .modal-info {
         position: absolute;
         bottom: 20px;
@@ -241,23 +295,14 @@
         transform: translateX(-50%);
         background: rgba(0, 0, 0, 0.8);
         color: white;
-        padding: 12px 24px;
+        padding: 15px 25px;
         border-radius: 25px;
         font-size: 14px;
-        z-index: 2001;
         text-align: center;
         max-width: 90%;
-      }
-      .image-counter {
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        background: rgba(0, 0, 0, 0.8);
-        color: white;
-        padding: 10px 18px;
-        border-radius: 20px;
-        font-size: 14px;
-        z-index: 2001;
+        z-index: 10002;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
       }
       .pdf-header {
         text-align: center;
@@ -367,194 +412,242 @@
           padding-left: 1rem;
           padding-right: 1rem;
         }
-        
+
         .step-card {
           padding: 1.25rem;
           margin-bottom: 1.5rem;
         }
-        
+
         .step-card h2 {
           font-size: 1.4rem;
           line-height: 1.3;
         }
-        
+
         .step-card p {
           font-size: 0.9rem;
           line-height: 1.5;
         }
-        
+
         .pdf-header {
           padding: 1.5rem 1rem;
           margin-bottom: 1.5rem;
         }
-        
+
         .pdf-header h1 {
           font-size: 1.8rem;
           line-height: 1.2;
         }
-        
+
         .pdf-header p {
           font-size: 1rem;
         }
-        
+
         /* Mobile-optimized image grid */
         .step-image-grid {
           grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
           gap: 0.5rem;
         }
-        
+
         /* Mobile image sizes */
         .mobile-image {
           max-height: 150px;
           width: 100%;
         }
-        
+
         .web-image {
           max-height: 130px;
           width: 100%;
         }
-        
+
         .main-image {
           max-height: 180px;
           width: 100%;
         }
-        
+
         /* Mobile zoom controls */
         .zoom-controls {
           bottom: 15px;
           right: 15px;
           padding: 0.5rem 1rem;
         }
-        
+
         .zoom-btn {
           width: 40px;
           height: 40px;
           font-size: 16px;
         }
-        
-        /* Mobile modal */
-        .modal-content {
-          max-width: 98%;
-          max-height: 95%;
+
+        /* Mobile modal improvements - Complete rewrite */
+        .modal-image {
+          max-width: 95%;
+          max-height: 90%;
         }
-        
+
+        .modal-close {
+          top: 15px;
+          right: 15px;
+          width: 45px;
+          height: 45px;
+        }
+
         .modal-nav {
-          padding: 12px 16px;
-          font-size: 20px;
+          width: 50px;
+          height: 50px;
         }
-        
-        .modal-info {
-          bottom: 15px;
-          padding: 10px 20px;
-          font-size: 13px;
+
+        .modal-prev {
+          left: 15px;
         }
-        
-        .image-counter {
+
+        .modal-next {
+          right: 15px;
+        }
+
+        .modal-counter {
           top: 15px;
           left: 15px;
-          padding: 8px 15px;
+          padding: 10px 18px;
           font-size: 13px;
         }
-        
-        .close {
-          top: 10px;
-          right: 20px;
-          font-size: 35px;
+
+        .modal-info {
+          bottom: 15px;
+          padding: 12px 20px;
+          font-size: 13px;
         }
       }
-      
+
       /* Extra small mobile devices */
       @media (max-width: 480px) {
         .container {
           padding-left: 0.75rem;
           padding-right: 0.75rem;
         }
-        
+
         .step-card {
           padding: 1rem;
           margin-bottom: 1rem;
         }
-        
+
         .step-card h2 {
           font-size: 1.25rem;
         }
-        
+
         .step-card p {
           font-size: 0.85rem;
         }
-        
+
         .pdf-header h1 {
           font-size: 1.5rem;
         }
-        
+
         .step-image-grid {
           grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
           gap: 0.4rem;
         }
-        
+
         .mobile-image {
           max-height: 120px;
         }
-        
+
         .web-image {
           max-height: 100px;
         }
-        
+
         .main-image {
           max-height: 150px;
         }
-        
+
         .zoom-controls {
           bottom: 10px;
           right: 10px;
           padding: 0.4rem 0.8rem;
         }
-        
+
         .zoom-btn {
           width: 36px;
           height: 36px;
           font-size: 14px;
         }
+
+        /* Extra small mobile modal optimizations */
+        .modal-image {
+          max-width: 98%;
+          max-height: 85%;
+        }
+
+        .modal-close {
+          top: 10px;
+          right: 10px;
+          width: 40px;
+          height: 40px;
+        }
+
+        .modal-nav {
+          width: 45px;
+          height: 45px;
+        }
+
+        .modal-prev {
+          left: 10px;
+        }
+
+        .modal-next {
+          right: 10px;
+        }
+
+        .modal-counter {
+          top: 10px;
+          left: 10px;
+          padding: 8px 15px;
+          font-size: 12px;
+        }
+
+        .modal-info {
+          bottom: 10px;
+          padding: 10px 18px;
+          font-size: 12px;
+        }
       }
-      
+
       /* Landscape mobile optimization */
       @media (max-width: 768px) and (orientation: landscape) {
         .pdf-header {
           padding: 1rem;
         }
-        
+
         .pdf-header h1 {
           font-size: 1.6rem;
         }
-        
+
         .step-card {
           padding: 1rem;
         }
-        
+
         .step-card h2 {
           font-size: 1.3rem;
         }
-        
+
         .step-image-grid {
           grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
         }
       }
-      
+
       /* Touch-friendly interactions */
       @media (hover: none) and (pointer: coarse) {
         .image-container:hover {
           transform: none;
         }
-        
+
         .step-card:hover {
           transform: none;
         }
-        
+
         .zoom-btn:hover {
           transform: none;
         }
       }
-      
+
       /* High DPI displays */
       @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
         .image-container {
@@ -579,7 +672,9 @@
       <div
         class="step-card bg-white rounded-xl shadow-lg p-6 border-2 border-blue-200"
       >
-        <div class="flex flex-col lg:flex-row items-start space-y-4 lg:space-y-0 lg:space-x-6 lg:space-x-reverse">
+        <div
+          class="flex flex-col lg:flex-row items-start space-y-4 lg:space-y-0 lg:space-x-6 lg:space-x-reverse"
+        >
           <div class="flex-1">
             <div class="flex items-center space-x-3 space-x-reverse mb-4">
               <span
@@ -611,7 +706,9 @@
       <div
         class="step-card bg-white rounded-xl shadow-lg p-6 border-2 border-gray-200"
       >
-        <div class="flex flex-col lg:flex-row items-start space-y-4 lg:space-y-0 lg:space-x-6 lg:space-x-reverse">
+        <div
+          class="flex flex-col lg:flex-row items-start space-y-4 lg:space-y-0 lg:space-x-6 lg:space-x-reverse"
+        >
           <div class="flex-1">
             <div class="flex items-center space-x-3 space-x-reverse mb-4">
               <span
@@ -698,7 +795,9 @@
       <div
         class="step-card bg-white rounded-xl shadow-lg p-6 border-2 border-gray-200"
       >
-        <div class="flex flex-col lg:flex-row items-start space-y-4 lg:space-y-0 lg:space-x-6 lg:space-x-reverse">
+        <div
+          class="flex flex-col lg:flex-row items-start space-y-4 lg:space-y-0 lg:space-x-6 lg:space-x-reverse"
+        >
           <div class="flex-1">
             <div class="flex items-center space-x-3 space-x-reverse mb-4">
               <span
@@ -786,7 +885,9 @@
       <div
         class="step-card bg-white rounded-xl shadow-lg p-6 border-2 border-gray-200"
       >
-        <div class="flex flex-col lg:flex-row items-start space-y-4 lg:space-y-0 lg:space-x-6 lg:space-x-reverse">
+        <div
+          class="flex flex-col lg:flex-row items-start space-y-4 lg:space-y-0 lg:space-x-6 lg:space-x-reverse"
+        >
           <div class="flex-1">
             <div class="flex items-center space-x-3 space-x-reverse mb-4">
               <span
@@ -819,7 +920,9 @@
       <div
         class="step-card bg-white rounded-xl shadow-lg p-6 border-2 border-gray-200"
       >
-        <div class="flex flex-col lg:flex-row items-start space-y-4 lg:space-y-0 lg:space-x-6 lg:space-x-reverse">
+        <div
+          class="flex flex-col lg:flex-row items-start space-y-4 lg:space-y-0 lg:space-x-6 lg:space-x-reverse"
+        >
           <div class="flex-1">
             <div class="flex items-center space-x-3 space-x-reverse mb-4">
               <span
@@ -856,21 +959,88 @@
     </div>
 
     <!-- Image Modal -->
-    <div id="imageModal" class="modal" onclick="closeModal()">
-      <span class="close">&times;</span>
-      <div class="image-counter" id="imageCounter"></div>
-      <div class="modal-info" id="modalInfo"></div>
+    <div id="imageModal" class="modal">
+      <div class="modal-overlay" onclick="closeModal()"></div>
+
+      <!-- Close Button - Fixed positioning and display -->
+      <button class="modal-close" onclick="closeModal()" title="بستن">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M18 6L6 18M6 6L18 18"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+
+      <!-- Image Counter -->
+      <div class="modal-counter" id="imageCounter"></div>
+
+      <!-- Navigation Buttons - Fixed directions and positioning -->
       <button
         class="modal-nav modal-prev"
         onclick="previousImage()"
         id="prevBtn"
+        title="تصویر قبلی"
       >
-        ‹
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M15 18L9 12L15 6"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
       </button>
-      <button class="modal-nav modal-next" onclick="nextImage()" id="nextBtn">
-        ›
+
+      <button
+        class="modal-nav modal-next"
+        onclick="nextImage()"
+        id="nextBtn"
+        title="تصویر بعدی"
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M9 18L15 12L9 6"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
       </button>
-      <img class="modal-content" id="modalImage" />
+
+      <!-- Main Image -->
+      <img
+        class="modal-image"
+        id="modalImage"
+        alt="تصویر"
+        onclick="event.stopPropagation()"
+      />
+
+      <!-- Image Info -->
+      <div class="modal-info" id="modalInfo"></div>
     </div>
 
     <script>
@@ -917,7 +1087,7 @@
         };
       }
 
-      // Open step modal with step-by-step navigation
+      // Enhanced modal functions - Complete rewrite
       function openStepModal(stepNumber, imageIndex) {
         currentStep = stepNumber;
         currentImageIndex = imageIndex;
@@ -932,6 +1102,7 @@
         const images = stepImages[stepNumber];
         const currentImage = images[imageIndex];
 
+        // Set image source and alt
         modalImg.src = currentImage.src;
         modalImg.alt = currentImage.alt;
 
@@ -941,15 +1112,23 @@
         // Update info
         info.textContent = currentImage.alt;
 
-        // Show/hide navigation buttons
-        prevBtn.style.display = imageIndex > 0 ? "block" : "none";
-        nextBtn.style.display =
-          imageIndex < images.length - 1 ? "block" : "none";
+        // Show/hide navigation buttons based on position
+        if (prevBtn) {
+          prevBtn.style.display = imageIndex > 0 ? "flex" : "none";
+        }
+        if (nextBtn) {
+          nextBtn.style.display =
+            imageIndex < images.length - 1 ? "flex" : "none";
+        }
 
+        // Show modal
         modal.style.display = "block";
+
+        // Add touch support
+        addModalTouchSupport();
       }
 
-      // Navigate to previous image
+      // Navigate to previous image - Fixed logic
       function previousImage() {
         if (currentImageIndex > 0) {
           currentImageIndex--;
@@ -957,13 +1136,122 @@
         }
       }
 
-      // Navigate to next image
+      // Navigate to next image - Fixed logic
       function nextImage() {
         const images = stepImages[currentStep];
         if (currentImageIndex < images.length - 1) {
           currentImageIndex++;
           openStepModal(currentStep, currentImageIndex);
         }
+      }
+
+      // Close modal
+      function closeModal() {
+        const modal = document.getElementById("imageModal");
+        if (modal) {
+          modal.style.display = "none";
+        }
+      }
+
+      // Enhanced touch support for mobile - Complete rewrite
+      function addModalTouchSupport() {
+        const modal = document.getElementById("imageModal");
+        if (!modal) return;
+
+        let startX = 0;
+        let startY = 0;
+        let isSwiping = false;
+        let swipeThreshold = 50;
+
+        // Remove existing listeners to prevent duplicates
+        modal.removeEventListener("touchstart", handleTouchStart);
+        modal.removeEventListener("touchmove", handleTouchMove);
+        modal.removeEventListener("touchend", handleTouchEnd);
+
+        function handleTouchStart(e) {
+          startX = e.touches[0].clientX;
+          startY = e.touches[0].clientY;
+          isSwiping = false;
+        }
+
+        function handleTouchMove(e) {
+          if (isSwiping) return;
+
+          const currentX = e.touches[0].clientX;
+          const currentY = e.touches[0].clientY;
+          const diffX = Math.abs(currentX - startX);
+          const diffY = Math.abs(currentY - startY);
+
+          // Start swiping if horizontal movement is significant
+          if (diffX > 20 && diffX > diffY) {
+            isSwiping = true;
+          }
+        }
+
+        function handleTouchEnd(e) {
+          if (!isSwiping) return;
+
+          const endX = e.changedTouches[0].clientX;
+          const endY = e.changedTouches[0].clientY;
+
+          const diffX = startX - endX;
+          const diffY = startY - endY;
+
+          // Only handle horizontal swipes
+          if (
+            Math.abs(diffX) > Math.abs(diffY) &&
+            Math.abs(diffX) > swipeThreshold
+          ) {
+            if (diffX > 0) {
+              // Swipe left - go to next image
+              nextImage();
+            } else {
+              // Swipe right - go to previous image
+              previousImage();
+            }
+          }
+
+          isSwiping = false;
+        }
+
+        // Add touch event listeners
+        modal.addEventListener("touchstart", handleTouchStart, {
+          passive: true
+        });
+        modal.addEventListener("touchmove", handleTouchMove, { passive: true });
+        modal.addEventListener("touchend", handleTouchEnd, { passive: true });
+      }
+
+      // Initialize modal system
+      function initializeModal() {
+        // Initialize step images
+        initializeStepImages();
+
+        // Hide modal initially
+        const modal = document.getElementById("imageModal");
+        if (modal) {
+          modal.style.display = "none";
+        }
+
+        // Add keyboard navigation
+        document.addEventListener("keydown", function (e) {
+          if (modal && modal.style.display === "block") {
+            switch (e.key) {
+              case "ArrowLeft":
+                e.preventDefault();
+                previousImage();
+                break;
+              case "ArrowRight":
+                e.preventDefault();
+                nextImage();
+                break;
+              case "Escape":
+                e.preventDefault();
+                closeModal();
+                break;
+            }
+          }
+        });
       }
 
       // Enhanced zoom functions with mobile support
@@ -991,55 +1279,10 @@
         document.body.style.transformOrigin = "top center";
       }
 
-      // Modal functions
-      function closeModal() {
-        document.getElementById("imageModal").style.display = "none";
-      }
-
       // Initialize
       document.addEventListener("DOMContentLoaded", function () {
-        initializeStepImages();
-        document.getElementById("imageModal").style.display = "none";
-        
-        // Add touch gesture support for mobile
-        addTouchSupport();
+        initializeModal();
       });
-
-      // Add touch gesture support for mobile devices
-      function addTouchSupport() {
-        let startX = 0;
-        let startY = 0;
-        let endX = 0;
-        let endY = 0;
-        
-        const modal = document.getElementById("imageModal");
-        
-        modal.addEventListener('touchstart', function(e) {
-          startX = e.touches[0].clientX;
-          startY = e.touches[0].clientY;
-        }, false);
-        
-        modal.addEventListener('touchend', function(e) {
-          endX = e.changedTouches[0].clientX;
-          endY = e.changedTouches[0].clientY;
-          
-          const diffX = startX - endX;
-          const diffY = startY - endY;
-          
-          // Minimum swipe distance
-          const minSwipeDistance = 50;
-          
-          if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > minSwipeDistance) {
-            if (diffX > 0) {
-              // Swipe left - next image
-              nextImage();
-            } else {
-              // Swipe right - previous image
-              previousImage();
-            }
-          }
-        }, false);
-      }
 
       // Add responsive design for mobile-friendliness
       const mediaQuery = window.matchMedia("(max-width: 768px)");
@@ -1068,17 +1311,6 @@
             resetZoom();
           }
         }
-
-        // Modal navigation with arrow keys
-        if (document.getElementById("imageModal").style.display === "block") {
-          if (e.key === "ArrowLeft") {
-            e.preventDefault();
-            previousImage();
-          } else if (e.key === "ArrowRight") {
-            e.preventDefault();
-            nextImage();
-          }
-        }
       });
 
       // Close modal with Escape key
@@ -1087,30 +1319,32 @@
           closeModal();
         }
       });
-      
+
       // Add mobile-specific optimizations
       function optimizeForMobile() {
         const isMobile = window.innerWidth <= 768;
-        
+
         if (isMobile) {
           // Optimize images for mobile
-          const images = document.querySelectorAll('.image-container');
+          const images = document.querySelectorAll(".image-container");
           images.forEach(img => {
-            img.style.maxWidth = '100%';
-            img.style.height = 'auto';
+            img.style.maxWidth = "100%";
+            img.style.height = "auto";
           });
-          
+
           // Adjust step cards for mobile
-          const stepCards = document.querySelectorAll('.step-card');
+          const stepCards = document.querySelectorAll(".step-card");
           stepCards.forEach(card => {
-            card.style.marginBottom = '1rem';
+            card.style.marginBottom = "1rem";
           });
         }
       }
-      
+
       // Call optimization on load and resize
-      window.addEventListener('load', optimizeForMobile);
-      window.addEventListener('resize', optimizeForMobile);
+      window.addEventListener("load", function () {
+        optimizeForMobile();
+      });
+      window.addEventListener("resize", optimizeForMobile);
     </script>
   </body>
 </html>
