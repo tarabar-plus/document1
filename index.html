@@ -2,7 +2,7 @@
 <html lang="fa" dir="rtl">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
     <title>TarabarPlus - راهنمای کامل سیستم</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Vazir Font Import -->
@@ -70,6 +70,8 @@
           transform: translateY(0);
         }
       }
+      
+      /* Enhanced Mobile-First Image Styling */
       .image-container {
         max-width: 100%;
         height: auto;
@@ -78,41 +80,51 @@
         cursor: pointer;
         transition: transform 0.3s ease, border-color 0.3s ease;
         border: 2px solid #e2e8f0;
+        touch-action: manipulation;
       }
       .image-container:hover {
         transform: scale(1.02);
         border-color: #3b82f6;
       }
+      
+      /* Mobile-optimized image sizes */
       .mobile-image {
-        max-height: 200px;
-        width: auto;
-        object-fit: contain;
+        max-height: 180px;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 12px;
       }
       .web-image {
-        max-height: 180px;
-        width: auto;
-        object-fit: contain;
+        max-height: 160px;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 12px;
       }
+      .main-image {
+        max-height: 220px;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 12px;
+      }
+      
+      /* Responsive image grid */
       .step-image-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
         gap: 0.75rem;
         margin-top: 1rem;
       }
-      .main-image {
-        max-height: 250px;
-        width: auto;
-        object-fit: contain;
-      }
+      
+      /* Mobile-specific zoom controls */
       .zoom-controls {
         position: fixed;
         bottom: 20px;
         right: 20px;
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(10px);
         border-radius: 50px;
         padding: 10px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         z-index: 1000;
         display: flex;
         gap: 0.5rem;
@@ -122,25 +134,27 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
       .zoom-btn {
-        width: 40px;
-        height: 40px;
+        width: 44px;
+        height: 44px;
         border: none;
         border-radius: 50%;
-        background: #3b82f6;
-        color: white;
+        background: #ffffff;
+        color: #3b82f6;
         font-size: 18px;
         cursor: pointer;
         margin: 0 5px;
         transition: background 0.3s ease, color 0.3s ease;
-        background: #ffffff;
-        color: #3b82f6;
         font-weight: bold;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
       }
-      .zoom-btn:hover {
+      .zoom-btn:hover, .zoom-btn:active {
         background: #3b82f6;
         color: #ffffff;
         transform: scale(1.1);
       }
+      
+      /* Enhanced modal for mobile */
       .modal {
         display: none;
         position: fixed;
@@ -149,23 +163,25 @@
         top: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.9);
+        background-color: rgba(0, 0, 0, 0.95);
         backdrop-filter: blur(5px);
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 1rem;
+        touch-action: manipulation;
       }
       .modal-content {
         margin: auto;
         display: block;
-        max-width: 90%;
+        max-width: 95%;
         max-height: 90%;
         object-fit: contain;
-        border-radius: 8px;
+        border-radius: 12px;
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         border: 4px solid #3b82f6;
         animation: fadeIn 0.5s ease-in-out;
+        touch-action: manipulation;
       }
       @keyframes fadeIn {
         from {
@@ -186,6 +202,8 @@
         font-weight: bold;
         cursor: pointer;
         z-index: 2001;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
       }
       .close:hover {
         color: #bbb;
@@ -203,6 +221,8 @@
         font-size: 24px;
         transition: all 0.3s ease;
         z-index: 2001;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
       }
       .modal-nav:hover {
         background: rgba(255, 255, 255, 0.3);
@@ -219,20 +239,22 @@
         bottom: 20px;
         left: 50%;
         transform: translateX(-50%);
-        background: rgba(0, 0, 0, 0.7);
+        background: rgba(0, 0, 0, 0.8);
         color: white;
-        padding: 10px 20px;
+        padding: 12px 24px;
         border-radius: 25px;
         font-size: 14px;
         z-index: 2001;
+        text-align: center;
+        max-width: 90%;
       }
       .image-counter {
         position: absolute;
         top: 20px;
         left: 20px;
-        background: rgba(0, 0, 0, 0.7);
+        background: rgba(0, 0, 0, 0.8);
         color: white;
-        padding: 8px 15px;
+        padding: 10px 18px;
         border-radius: 20px;
         font-size: 14px;
         z-index: 2001;
@@ -339,30 +361,205 @@
         }
       }
 
-      /* Responsive Design */
+      /* Enhanced Mobile-First Responsive Design */
       @media (max-width: 768px) {
+        .container {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+        
         .step-card {
-          padding: 1.5rem;
+          padding: 1.25rem;
+          margin-bottom: 1.5rem;
         }
+        
         .step-card h2 {
-          font-size: 1.5rem;
+          font-size: 1.4rem;
+          line-height: 1.3;
         }
+        
         .step-card p {
           font-size: 0.9rem;
+          line-height: 1.5;
         }
+        
+        .pdf-header {
+          padding: 1.5rem 1rem;
+          margin-bottom: 1.5rem;
+        }
+        
+        .pdf-header h1 {
+          font-size: 1.8rem;
+          line-height: 1.2;
+        }
+        
+        .pdf-header p {
+          font-size: 1rem;
+        }
+        
+        /* Mobile-optimized image grid */
+        .step-image-grid {
+          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+          gap: 0.5rem;
+        }
+        
+        /* Mobile image sizes */
+        .mobile-image {
+          max-height: 150px;
+          width: 100%;
+        }
+        
+        .web-image {
+          max-height: 130px;
+          width: 100%;
+        }
+        
+        .main-image {
+          max-height: 180px;
+          width: 100%;
+        }
+        
+        /* Mobile zoom controls */
+        .zoom-controls {
+          bottom: 15px;
+          right: 15px;
+          padding: 0.5rem 1rem;
+        }
+        
+        .zoom-btn {
+          width: 40px;
+          height: 40px;
+          font-size: 16px;
+        }
+        
+        /* Mobile modal */
+        .modal-content {
+          max-width: 98%;
+          max-height: 95%;
+        }
+        
+        .modal-nav {
+          padding: 12px 16px;
+          font-size: 20px;
+        }
+        
+        .modal-info {
+          bottom: 15px;
+          padding: 10px 20px;
+          font-size: 13px;
+        }
+        
+        .image-counter {
+          top: 15px;
+          left: 15px;
+          padding: 8px 15px;
+          font-size: 13px;
+        }
+        
+        .close {
+          top: 10px;
+          right: 20px;
+          font-size: 35px;
+        }
+      }
+      
+      /* Extra small mobile devices */
+      @media (max-width: 480px) {
+        .container {
+          padding-left: 0.75rem;
+          padding-right: 0.75rem;
+        }
+        
+        .step-card {
+          padding: 1rem;
+          margin-bottom: 1rem;
+        }
+        
+        .step-card h2 {
+          font-size: 1.25rem;
+        }
+        
+        .step-card p {
+          font-size: 0.85rem;
+        }
+        
+        .pdf-header h1 {
+          font-size: 1.5rem;
+        }
+        
+        .step-image-grid {
+          grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+          gap: 0.4rem;
+        }
+        
+        .mobile-image {
+          max-height: 120px;
+        }
+        
+        .web-image {
+          max-height: 100px;
+        }
+        
+        .main-image {
+          max-height: 150px;
+        }
+        
         .zoom-controls {
           bottom: 10px;
           right: 10px;
-          padding: 0.5rem 1rem;
+          padding: 0.4rem 0.8rem;
         }
+        
         .zoom-btn {
-          width: 35px;
-          height: 35px;
-          font-size: 16px;
+          width: 36px;
+          height: 36px;
+          font-size: 14px;
         }
-        .modal-content {
-          max-width: 95%;
-          max-height: 95%;
+      }
+      
+      /* Landscape mobile optimization */
+      @media (max-width: 768px) and (orientation: landscape) {
+        .pdf-header {
+          padding: 1rem;
+        }
+        
+        .pdf-header h1 {
+          font-size: 1.6rem;
+        }
+        
+        .step-card {
+          padding: 1rem;
+        }
+        
+        .step-card h2 {
+          font-size: 1.3rem;
+        }
+        
+        .step-image-grid {
+          grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        }
+      }
+      
+      /* Touch-friendly interactions */
+      @media (hover: none) and (pointer: coarse) {
+        .image-container:hover {
+          transform: none;
+        }
+        
+        .step-card:hover {
+          transform: none;
+        }
+        
+        .zoom-btn:hover {
+          transform: none;
+        }
+      }
+      
+      /* High DPI displays */
+      @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        .image-container {
+          image-rendering: -webkit-optimize-contrast;
+          image-rendering: crisp-edges;
         }
       }
     </style>
@@ -382,7 +579,7 @@
       <div
         class="step-card bg-white rounded-xl shadow-lg p-6 border-2 border-blue-200"
       >
-        <div class="flex items-start space-x-6 space-x-reverse">
+        <div class="flex flex-col lg:flex-row items-start space-y-4 lg:space-y-0 lg:space-x-6 lg:space-x-reverse">
           <div class="flex-1">
             <div class="flex items-center space-x-3 space-x-reverse mb-4">
               <span
@@ -398,11 +595,11 @@
               دسترسی داشته باشند.
             </p>
           </div>
-          <div class="flex-shrink-0">
+          <div class="flex-shrink-0 w-full lg:w-auto">
             <img
               src="./images/step_1.PNG"
               alt="صفحه اصلی سامانه"
-              class="image-container main-image"
+              class="image-container main-image w-full"
               loading="lazy"
               onclick="openStepModal(1, 0)"
             />
@@ -414,7 +611,7 @@
       <div
         class="step-card bg-white rounded-xl shadow-lg p-6 border-2 border-gray-200"
       >
-        <div class="flex items-start space-x-6 space-x-reverse">
+        <div class="flex flex-col lg:flex-row items-start space-y-4 lg:space-y-0 lg:space-x-6 lg:space-x-reverse">
           <div class="flex-1">
             <div class="flex items-center space-x-3 space-x-reverse mb-4">
               <span
@@ -432,11 +629,11 @@
               کامل فعالیت‌ها می‌باشد.
             </p>
           </div>
-          <div class="flex-shrink-0">
+          <div class="flex-shrink-0 w-full lg:w-auto">
             <img
               src="./images/step_2.PNG"
               alt="فرم ورود به سامانه"
-              class="image-container main-image"
+              class="image-container main-image w-full"
               loading="lazy"
               onclick="openStepModal(2, 0)"
             />
@@ -501,7 +698,7 @@
       <div
         class="step-card bg-white rounded-xl shadow-lg p-6 border-2 border-gray-200"
       >
-        <div class="flex items-start space-x-6 space-x-reverse">
+        <div class="flex flex-col lg:flex-row items-start space-y-4 lg:space-y-0 lg:space-x-6 lg:space-x-reverse">
           <div class="flex-1">
             <div class="flex items-center space-x-3 space-x-reverse mb-4">
               <span
@@ -517,11 +714,11 @@
               . و با انتخاب قسمت علام بار به سمت بارهای اعلامی هدایت می‌شود.
             </p>
           </div>
-          <div class="flex-shrink-0">
+          <div class="flex-shrink-0 w-full lg:w-auto">
             <img
               src="./images/step_5_1.jpg"
               alt="پنل موبایل راننده"
-              class="image-container main-image"
+              class="image-container main-image w-full"
               loading="lazy"
               onclick="openStepModal(4, 0)"
             />
@@ -589,7 +786,7 @@
       <div
         class="step-card bg-white rounded-xl shadow-lg p-6 border-2 border-gray-200"
       >
-        <div class="flex items-start space-x-6 space-x-reverse">
+        <div class="flex flex-col lg:flex-row items-start space-y-4 lg:space-y-0 lg:space-x-6 lg:space-x-reverse">
           <div class="flex-1">
             <div class="flex items-center space-x-3 space-x-reverse mb-4">
               <span
@@ -606,11 +803,11 @@
               حواله چاپ کند .
             </p>
           </div>
-          <div class="flex-shrink-0">
+          <div class="flex-shrink-0 w-full lg:w-auto">
             <img
               src="./images/step_6_1.PNG"
               alt="جزئیات بار و اعلان‌ها"
-              class="image-container main-image"
+              class="image-container main-image w-full"
               loading="lazy"
               onclick="openStepModal(6, 0)"
             />
@@ -622,7 +819,7 @@
       <div
         class="step-card bg-white rounded-xl shadow-lg p-6 border-2 border-gray-200"
       >
-        <div class="flex items-start space-x-6 space-x-reverse">
+        <div class="flex flex-col lg:flex-row items-start space-y-4 lg:space-y-0 lg:space-x-6 lg:space-x-reverse">
           <div class="flex-1">
             <div class="flex items-center space-x-3 space-x-reverse mb-4">
               <span
@@ -636,11 +833,11 @@
               برای او حواله را چاپ می کند
             </p>
           </div>
-          <div class="flex-shrink-0">
+          <div class="flex-shrink-0 w-full lg:w-auto">
             <img
               src="./images/step_7_1.PNG"
               alt=" چاپ حواله"
-              class="image-container main-image"
+              class="image-container main-image w-full"
               loading="lazy"
               onclick="openStepModal(7, 0)"
             />
@@ -769,7 +966,7 @@
         }
       }
 
-      // Zoom functions
+      // Enhanced zoom functions with mobile support
       function zoomIn() {
         if (currentZoom < maxZoom) {
           currentZoom += zoomStep;
@@ -803,7 +1000,46 @@
       document.addEventListener("DOMContentLoaded", function () {
         initializeStepImages();
         document.getElementById("imageModal").style.display = "none";
+        
+        // Add touch gesture support for mobile
+        addTouchSupport();
       });
+
+      // Add touch gesture support for mobile devices
+      function addTouchSupport() {
+        let startX = 0;
+        let startY = 0;
+        let endX = 0;
+        let endY = 0;
+        
+        const modal = document.getElementById("imageModal");
+        
+        modal.addEventListener('touchstart', function(e) {
+          startX = e.touches[0].clientX;
+          startY = e.touches[0].clientY;
+        }, false);
+        
+        modal.addEventListener('touchend', function(e) {
+          endX = e.changedTouches[0].clientX;
+          endY = e.changedTouches[0].clientY;
+          
+          const diffX = startX - endX;
+          const diffY = startY - endY;
+          
+          // Minimum swipe distance
+          const minSwipeDistance = 50;
+          
+          if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > minSwipeDistance) {
+            if (diffX > 0) {
+              // Swipe left - next image
+              nextImage();
+            } else {
+              // Swipe right - previous image
+              previousImage();
+            }
+          }
+        }, false);
+      }
 
       // Add responsive design for mobile-friendliness
       const mediaQuery = window.matchMedia("(max-width: 768px)");
@@ -817,7 +1053,7 @@
       mediaQuery.addListener(handleMobileView);
       handleMobileView(mediaQuery);
 
-      // Add keyboard navigation
+      // Enhanced keyboard navigation with mobile considerations
       document.addEventListener("keydown", function (e) {
         // Zoom with keyboard
         if (e.ctrlKey || e.metaKey) {
@@ -851,6 +1087,30 @@
           closeModal();
         }
       });
+      
+      // Add mobile-specific optimizations
+      function optimizeForMobile() {
+        const isMobile = window.innerWidth <= 768;
+        
+        if (isMobile) {
+          // Optimize images for mobile
+          const images = document.querySelectorAll('.image-container');
+          images.forEach(img => {
+            img.style.maxWidth = '100%';
+            img.style.height = 'auto';
+          });
+          
+          // Adjust step cards for mobile
+          const stepCards = document.querySelectorAll('.step-card');
+          stepCards.forEach(card => {
+            card.style.marginBottom = '1rem';
+          });
+        }
+      }
+      
+      // Call optimization on load and resize
+      window.addEventListener('load', optimizeForMobile);
+      window.addEventListener('resize', optimizeForMobile);
     </script>
   </body>
 </html>
