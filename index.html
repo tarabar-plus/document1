@@ -261,7 +261,7 @@
           </div>
           <div class="flex-shrink-0">
             <img
-              src="extracted_images/step-1.png"
+              src="./step-1.png"
               alt="صفحه اصلی سامانه"
               class="image-container main-image"
               loading="lazy"
@@ -295,7 +295,7 @@
           </div>
           <div class="flex-shrink-0">
             <img
-              src="extracted_images/step-2.png"
+              src="./step-2.png"
               alt="فرم ورود به سامانه"
               class="image-container main-image"
               loading="lazy"
@@ -328,28 +328,28 @@
         <!-- Cargo Registration Images Grid -->
         <div class="step-image-grid">
           <img
-            src="extracted_images/step-3.png"
+            src="./step-3.png"
             alt="فرم ثبت بار قسمت اول"
             class="image-container web-image"
             loading="lazy"
             onclick="openStepModal(3, 0)"
           />
           <img
-            src="extracted_images/step-4.png"
+            src="./step-4.png"
             alt="فرم ثبت بار قسمت دوم"
             class="image-container web-image"
             loading="lazy"
             onclick="openStepModal(3, 1)"
           />
           <img
-            src="extracted_images/step-5.png"
+            src="./step-5.png"
             alt="تاریخچه بارها"
             class="image-container web-image"
             loading="lazy"
             onclick="openStepModal(3, 2)"
           />
           <img
-            src="extracted_images/step-6.png"
+            src="./step-6.png"
             alt="نحوه فعالسازی بار"
             class="image-container web-image"
             loading="lazy"
@@ -380,7 +380,7 @@
           </div>
           <div class="flex-shrink-0">
             <img
-              src="extracted_images/step-7.jpeg"
+              src="./step-7.jpeg"
               alt="پنل موبایل راننده"
               class="image-container main-image"
               loading="lazy"
@@ -416,28 +416,28 @@
         <!-- Mobile App Images Grid -->
         <div class="step-image-grid">
           <img
-            src="extracted_images/step-8.jpeg"
+            src="./step-8.jpeg"
             alt="داشبورد موبایل"
             class="image-container mobile-image"
             loading="lazy"
             onclick="openStepModal(5, 0)"
           />
           <img
-            src="extracted_images/step-9.jpeg"
+            src="./step-9.jpeg"
             alt="تنظیمات موبایل"
             class="image-container mobile-image"
             loading="lazy"
             onclick="openStepModal(5, 1)"
           />
           <img
-            src="extracted_images/step-10.jpeg"
+            src="./step-10.jpeg"
             alt="پروفایل موبایل"
             class="image-container mobile-image"
             loading="lazy"
             onclick="openStepModal(5, 2)"
           />
           <img
-            src="extracted_images/step-11.jpeg"
+            src="./step-11.jpeg"
             alt="اعلان‌های موبایل"
             class="image-container mobile-image"
             loading="lazy"
@@ -469,7 +469,7 @@
           </div>
           <div class="flex-shrink-0">
             <img
-              src="extracted_images/step-12.png"
+              src="./step-12.png"
               alt="جزئیات بار و اعلان‌ها"
               class="image-container main-image"
               loading="lazy"
@@ -499,7 +499,7 @@
           </div>
           <div class="flex-shrink-0">
             <img
-              src="extracted_images/step-13.png"
+              src="./step-13.png"
               alt=" چاپ حواله"
               class="image-container main-image"
               loading="lazy"
@@ -550,39 +550,37 @@
       // Define images for each step
       function initializeStepImages() {
         stepImages = {
-          1: [{ src: "extracted_images/step-1.png", alt: "صفحه اصلی سیستم" }],
-          2: [{ src: "extracted_images/step-2.png", alt: "فرم ورود به سیستم" }],
+          1: [{ src: "./step-1.png", alt: "صفحه اصلی سیستم" }],
+          2: [{ src: "./step-2.png", alt: "فرم ورود به سیستم" }],
           3: [
-            { src: "extracted_images/step-3.png", alt: "فرم ثبت بار قسمت اول" },
-            { src: "extracted_images/step-4.png", alt: "فرم ثبت بار قسمت دوم" },
-            { src: "extracted_images/step-5.png", alt: "تاریخچه بارها" },
-            { src: "extracted_images/step-6.png", alt: "نحوه فعالسازی بار" }
+            { src: "./step-3.png", alt: "فرم ثبت بار قسمت اول" },
+            { src: "./step-4.png", alt: "فرم ثبت بار قسمت دوم" },
+            { src: "./step-5.png", alt: "تاریخچه بارها" },
+            { src: "./step-6.png", alt: "نحوه فعالسازی بار" }
           ],
-          4: [
-            { src: "extracted_images/step-7.jpeg", alt: "پنل موبایل راننده" }
-          ],
+          4: [{ src: "./step-7.jpeg", alt: "پنل موبایل راننده" }],
           5: [
-            { src: "extracted_images/step-8.jpeg", alt: "صفحه اعلام بارها" },
+            { src: "./step-8.jpeg", alt: "صفحه اعلام بارها" },
             {
-              src: "extracted_images/step-9.jpeg",
+              src: "./step-9.jpeg",
               alt: "نتیجه ثبت بار درون صفحه اعلام‌بارها"
             },
             {
-              src: "extracted_images/step-10.jpeg",
+              src: "./step-10.jpeg",
               alt: "دریافت پیامک موفقیت آمیز"
             },
             {
-              src: "extracted_images/step-11.jpeg",
+              src: "./step-11.jpeg",
               alt: "مشاهده بار در تب سابقه بارها "
             }
           ],
           6: [
             {
-              src: "extracted_images/step-12.png",
+              src: "./step-12.png",
               alt: "لیست راننده ها و انجام عملگر مناسب"
             }
           ],
-          7: [{ src: "extracted_images/step-13.png", alt: "چاپ حواله  " }]
+          7: [{ src: "./step-13.png", alt: "چاپ حواله  " }]
         };
       }
 
